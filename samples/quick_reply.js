@@ -1,4 +1,4 @@
-/* jshint node: true, devel: true */
+/* jshint node: true */
 'use strict';
 
 /*

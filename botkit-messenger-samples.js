@@ -1,7 +1,25 @@
 'use strict';
+const
+  path = require('path'),
+  express = require('express')
+;
 
 var MessengerSamples = function(controller, bot, config) {
+  if (!controller.webserver) {
+    console.error('botkit-messenger-samples: controller.webserver is not set');
+    process.exit(1);
+  }
   config = config || {};
+  if (!config.serverUrl) {
+    console.log('botkit-messenger-samples: config.serverUrl not set, ' +
+      'so messages with assets will not work properly');
+    config.serverUrl = 'http://' + controller.config.hostname +
+      (controller.config.port && controller.config.port !== '80' ?
+        ':' + controller.config.port :
+        ''
+      )
+    ;
+  }
   var
     theThis = this,
     prefix = config.prefix || 'sample',
@@ -27,6 +45,10 @@ var MessengerSamples = function(controller, bot, config) {
       'video'
     ]
   ;
+  theThis.SERVER_URL = config.serverUrl + '/messenger-samples';
+
+  // setup static folder for sample assets
+  controller.webserver.use('/messenger-samples', express.static(path.join(__dirname, 'assets')));
 
   controller.hears(hearPattern, 'message_received', function(bot, message) {
     var
@@ -47,6 +69,8 @@ var MessengerSamples = function(controller, bot, config) {
       case 'generic':
       case 'gif':
       case 'image':
+        reply = theThis.image();
+        break;
       case 'image:large':
       case 'image:tall':
       case 'list':
@@ -86,5 +110,6 @@ var MessengerSamples = function(controller, bot, config) {
 MessengerSamples.prototype.quickReply = require('./samples/quick_reply.js');
 MessengerSamples.prototype.typingOn = require('./samples/typing_on.js');
 MessengerSamples.prototype.typingOff = require('./samples/typing_off.js');
+MessengerSamples.prototype.image = require('./samples/image_message.js');
 
 module.exports = MessengerSamples;

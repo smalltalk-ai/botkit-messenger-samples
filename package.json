@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/smalltalk-ai/botkit-messenger-samples/issues"
   },
-  "homepage": "https://github.com/smalltalk-ai/botkit-messenger-samples#readme"
+  "homepage": "https://github.com/smalltalk-ai/botkit-messenger-samples#readme",
+  "dependencies": {
+    "path": "^0.12.7"
+  }
 }
