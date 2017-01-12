@@ -64,9 +64,17 @@ var MessengerSamples = function(controller, bot, config) {
         break;
       case 'account linking':
       case 'audio':
+        reply = theThis.audio();
+        break;
       case 'button':
+        reply = theThis.button();
+        break;
       case 'file':
+        reply = theThis.file();
+        break;
       case 'generic':
+        reply = theThis.genericTemplate();
+        break;
       case 'gif':
       case 'image':
         reply = theThis.image();
@@ -107,9 +115,13 @@ var MessengerSamples = function(controller, bot, config) {
   });
 };
 
+MessengerSamples.prototype.audio = require('./samples/audio_message.js');
+MessengerSamples.prototype.button = require('./samples/button_message.js');
+MessengerSamples.prototype.file = require('./samples/file_message.js');
+MessengerSamples.prototype.genericTemplate = require('./samples/generic_message.js');
+MessengerSamples.prototype.image = require('./samples/image_message.js');
 MessengerSamples.prototype.quickReply = require('./samples/quick_reply.js');
 MessengerSamples.prototype.typingOn = require('./samples/typing_on.js');
 MessengerSamples.prototype.typingOff = require('./samples/typing_off.js');
-MessengerSamples.prototype.image = require('./samples/image_message.js');
 
 module.exports = MessengerSamples;
