@@ -3,6 +3,7 @@
 var MessengerSamples = function(controller, bot, config) {
   config = config || {};
   var
+    theThis = this,
     prefix = config.prefix || 'sample',
     hearPattern = '^' + prefix + ':',
     regex = new RegExp(hearPattern, 'i'),
@@ -49,11 +50,13 @@ var MessengerSamples = function(controller, bot, config) {
 
         break;
       case 'quick reply':
-        reply = require('./samples/quick_reply.js')();
+        reply = theThis.quickReply();
         break;
     }
     bot.reply(message, reply);
   });
 };
+
+MessengerSamples.prototype.quickReply = require('./samples/quick_reply.js');
 
 module.exports = MessengerSamples;
