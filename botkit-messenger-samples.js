@@ -6,7 +6,7 @@ var MessengerSamples = function(controller, bot, config) {
     prefix = config.prefix || 'sample',
     hearPattern = '^' + prefix + ':',
     regex = new RegExp(hearPattern, 'i'),
-    requests = [
+    help = [
       'account linking',
       'audio',
       'button',
@@ -29,15 +29,16 @@ var MessengerSamples = function(controller, bot, config) {
 
   controller.hears(hearPattern, 'message_received', function(bot, message) {
     var
-      request = message.text.replace(regex, '')
+      request = message.text.replace(regex, ''),
+      reply = request
     ;
     console.log(message);
     switch (request) {
       case 'help':
-        var reply = requests.map(function(item) {
+        reply = help.map(function(item) {
           return prefix + ':' + item;
         }).join('\n');
-        return bot.reply(message, reply);
+        break;
       case 'image':
 
         break;
@@ -47,10 +48,11 @@ var MessengerSamples = function(controller, bot, config) {
       case 'image:tall':
 
         break;
-      default:
-
+      case 'quick reply':
+        reply = require('./samples/quick_reply.js')();
+        break;
     }
-    bot.reply(message, request);
+    bot.reply(message, reply);
   });
 };
 
