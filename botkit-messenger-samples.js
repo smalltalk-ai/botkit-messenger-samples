@@ -40,18 +40,30 @@ var MessengerSamples = function(controller, bot, config) {
           return prefix + ':' + item;
         }).join('\n');
         break;
+      case 'account linking':
+      case 'audio':
+      case 'button':
+      case 'file':
+      case 'generic':
+      case 'gif':
       case 'image':
-
-        break;
       case 'image:large':
-
-        break;
       case 'image:tall':
-
+      case 'list':
+      case 'list:compact':
         break;
       case 'quick reply':
         reply = theThis.quickReply();
         break;
+      case 'read receipt':
+      case 'receipt':
+      case 'typing on':
+        reply = theThis.typingOn();
+        break;
+      case 'typing off':
+        reply = theThis.typingOff();
+        break;
+      case 'video':
       default:
         // handle JSON samples
         if (reply.toLowerCase().startsWith('json:')) {
@@ -72,5 +84,7 @@ var MessengerSamples = function(controller, bot, config) {
 };
 
 MessengerSamples.prototype.quickReply = require('./samples/quick_reply.js');
+MessengerSamples.prototype.typingOn = require('./samples/typing_on.js');
+MessengerSamples.prototype.typingOff = require('./samples/typing_off.js');
 
 module.exports = MessengerSamples;
