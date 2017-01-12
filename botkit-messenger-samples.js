@@ -52,6 +52,20 @@ var MessengerSamples = function(controller, bot, config) {
       case 'quick reply':
         reply = theThis.quickReply();
         break;
+      default:
+        // handle JSON samples
+        if (reply.toLowerCase().startsWith('json:')) {
+          try {
+            var
+              jsonString = reply.replace(/^json:/i, ''),
+              json = JSON.parse(jsonString)
+            ;
+            reply = json;
+          }
+          catch(ex) {
+            // payload is not JSON, so leave as string
+          }
+        }
     }
     bot.reply(message, reply);
   });
