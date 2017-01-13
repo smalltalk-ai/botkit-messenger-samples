@@ -26,15 +26,15 @@ var MessengerSamples = function(controller, bot, config) {
     hearPattern = '^' + prefix + ':',
     regex = new RegExp(hearPattern, 'i'),
     help = [
-      'account linking',
+      //'account linking',
       'audio',
       'button',
       'file',
       'generic',
       'gif',
       'image',
-      'image:large',
       'image:tall',
+      'image:wide',
       'list',
       'list:compact',
       'quick reply',
@@ -55,7 +55,7 @@ var MessengerSamples = function(controller, bot, config) {
       request = message.text.replace(regex, ''),
       reply = request
     ;
-    console.log(message);
+
     switch (request) {
       case 'help':
         reply = help.map(function(item) {
@@ -76,19 +76,32 @@ var MessengerSamples = function(controller, bot, config) {
         reply = theThis.genericTemplate();
         break;
       case 'gif':
+        reply = theThis.gif();
+        break;
       case 'image':
         reply = theThis.image();
         break;
-      case 'image:large':
       case 'image:tall':
+        reply = theThis.imageTall();
+        break;
+      case 'image:wide':
+        reply = theThis.imageWide();
+        break;
       case 'list':
+        reply = theThis.list();
+        break;
       case 'list:compact':
+        reply = theThis.list('compact');
         break;
       case 'quick reply':
         reply = theThis.quickReply();
         break;
       case 'read receipt':
+        reply = theThis.readReceipt();
+        break;
       case 'receipt':
+        reply = theThis.receipt();
+        break;
       case 'typing on':
         reply = theThis.typingOn();
         break;
@@ -96,6 +109,8 @@ var MessengerSamples = function(controller, bot, config) {
         reply = theThis.typingOff();
         break;
       case 'video':
+        reply = theThis.video();
+        break;
       default:
         // handle JSON samples
         if (reply.toLowerCase().startsWith('json:')) {
@@ -119,9 +134,16 @@ MessengerSamples.prototype.audio = require('./samples/audio_message.js');
 MessengerSamples.prototype.button = require('./samples/button_message.js');
 MessengerSamples.prototype.file = require('./samples/file_message.js');
 MessengerSamples.prototype.genericTemplate = require('./samples/generic_message.js');
+MessengerSamples.prototype.gif = require('./samples/gif_message.js');
 MessengerSamples.prototype.image = require('./samples/image_message.js');
+MessengerSamples.prototype.imageTall = require('./samples/image_tall_message.js');
+MessengerSamples.prototype.imageWide = require('./samples/image_wide_message.js');
+MessengerSamples.prototype.list = require('./samples/list_message.js');
 MessengerSamples.prototype.quickReply = require('./samples/quick_reply.js');
+MessengerSamples.prototype.readReceipt = require('./samples/read_receipt.js');
+MessengerSamples.prototype.receipt = require('./samples/receipt_message.js');
 MessengerSamples.prototype.typingOn = require('./samples/typing_on.js');
 MessengerSamples.prototype.typingOff = require('./samples/typing_off.js');
+MessengerSamples.prototype.video = require('./samples/video_message.js');
 
 module.exports = MessengerSamples;
