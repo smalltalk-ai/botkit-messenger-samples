@@ -26,6 +26,13 @@ controller.setupWebserver(process.env.port,function(err,webserver) {
     serverUrl: 'https://_your_server_' // use localtunnel or ngrok for testing
     //, prefix: 'example' // default: sample
   });
+
+  // the samples are also exposed, so you can call them directly
+  controller.hears('send a list', 'message_received', function(bot, message) {
+    // send the List Template sample
+    bot.reply(message, messengerSamples.list());
+  });
+
 });
 
 // this is triggered when a user clicks the send-to-messenger plugin
