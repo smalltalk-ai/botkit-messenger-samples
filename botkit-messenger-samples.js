@@ -44,7 +44,8 @@ var MessengerSamples = function(controller, bot, config) {
       'typing off',
       'video'
     ],
-    assetsPath = '/messenger-samples'
+    assetsPath = '/messenger-samples',
+    cb = config.replyCb
   ;
   theThis.SERVER_URL = config.serverUrl + assetsPath;
 
@@ -127,7 +128,7 @@ var MessengerSamples = function(controller, bot, config) {
           }
         }
     }
-    bot.reply(message, reply);
+    bot.reply(message, reply, cb);
   });
 };
 
