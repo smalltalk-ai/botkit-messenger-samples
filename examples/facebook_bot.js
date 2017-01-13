@@ -11,16 +11,20 @@ var controller = Botkit.facebookbot({
 var bot = controller.spawn({
 });
 
-// setup to receive "sample:" messages from Facebook Messenger
-// and send back replies
-// send: sample:help for a list of supported samples
-var messengerSamples = new MessengerSamples(controller, bot);
-
 // if you are already using Express, you can use your own server instance...
 // see "Use BotKit with an Express web server"
 controller.setupWebserver(process.env.port,function(err,webserver) {
   controller.createWebhookEndpoints(controller.webserver, bot, function() {
     console.log('This bot is online!!!');
+  });
+
+  // after the controller.webserver is set (in setupWebserver)
+  // setup to receive "sample:" messages from Facebook Messenger
+  // and send back replies
+  // "send: sample:help" for a list of supported samples
+  var messengerSamples = new MessengerSamples(controller, bot{
+    serverUrl: 'https://_your_server_' // use localtunnel or ngrok for testing
+    //, prefix: 'example' // default: sample
   });
 });
 

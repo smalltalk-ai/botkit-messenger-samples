@@ -1,6 +1,6 @@
 {
   "name": "botkit-messenger-samples",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Module to receive sample messages of all types from a Facebook Messenger chatbot",
   "main": "botkit-messenger-samples.js",
   "scripts": {
@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/smalltalk-ai/botkit-messenger-samples/issues"
   },
-  "homepage": "https://github.com/smalltalk-ai/botkit-messenger-samples#readme"
+  "homepage": "https://github.com/smalltalk-ai/botkit-messenger-samples#readme",
+  "dependencies": {
+    "path": "^0.12.7"
+  }
 }
