@@ -18,7 +18,7 @@
     "examples",
     "chatbot"
   ],
-  "author": "",
+  "author": "Joshua Salwen <contact@smalltalk.ai> (https://www.smalltalk.ai)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/smalltalk-ai/botkit-messenger-samples/issues"
