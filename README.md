@@ -28,7 +28,9 @@ controller.setupWebserver(process.env.port,function(err, webserver) {
     // serverUrl (e.g., https://my.domain.com)
     // needed to server up sample images
     serverUrl: process.env.serverUrl
-    //,
+    //, replyCb = function(err, body) {
+    //    // call after a sample message is sent
+    //  }
   });
 });
 ```
