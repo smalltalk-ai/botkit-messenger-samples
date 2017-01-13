@@ -43,12 +43,13 @@ var MessengerSamples = function(controller, bot, config) {
       'typing on',
       'typing off',
       'video'
-    ]
+    ],
+    assetsPath = '/messenger-samples'
   ;
-  theThis.SERVER_URL = config.serverUrl + '/messenger-samples';
+  theThis.SERVER_URL = config.serverUrl + assetsPath;
 
   // setup static folder for sample assets
-  controller.webserver.use('/messenger-samples', express.static(path.join(__dirname, 'assets')));
+  controller.webserver.use(assetsPath, express.static(path.join(__dirname, 'assets')));
 
   controller.hears(hearPattern, 'message_received', function(bot, message) {
     var
