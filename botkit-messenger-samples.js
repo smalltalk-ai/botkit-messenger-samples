@@ -55,80 +55,87 @@ var MessengerSamples = function(controller, bot, config) {
   controller.hears(hearPattern, 'message_received', function(bot, message) {
     var
       request = message.text.replace(regex, ''),
-      reply = request
+      replies = request
     ;
 
     switch (request) {
       case 'help':
-        reply = help.map(function(item) {
+        replies = help.map(function(item) {
           return prefix + ':' + item;
         }).join('\n');
         break;
       case 'account linking':
       case 'audio':
-        reply = theThis.audio();
+        replies = theThis.audio();
         break;
       case 'button':
-        reply = theThis.button();
+        replies = theThis.button();
         break;
       case 'file':
-        reply = theThis.file();
+        replies = theThis.file();
         break;
       case 'generic':
-        reply = theThis.genericTemplate();
+        replies = theThis.genericTemplate();
         break;
       case 'gif':
-        reply = theThis.gif();
+        replies = theThis.gif();
         break;
       case 'image':
-        reply = theThis.image();
+        replies = theThis.image();
         break;
       case 'image:tall':
-        reply = theThis.imageTall();
+        replies = theThis.imageTall();
         break;
       case 'image:wide':
-        reply = theThis.imageWide();
+        replies = theThis.imageWide();
         break;
       case 'list':
-        reply = theThis.list();
+        replies = theThis.list();
         break;
       case 'list:compact':
-        reply = theThis.list('compact');
+        replies = theThis.list('compact');
         break;
       case 'quick reply':
-        reply = theThis.quickReply();
+        replies = theThis.quickReply();
         break;
       case 'read receipt':
-        reply = theThis.readReceipt();
+        replies = theThis.readReceipt();
         break;
       case 'receipt':
-        reply = theThis.receipt();
+        replies = theThis.receipt();
         break;
       case 'typing on':
-        reply = theThis.typingOn();
+        replies = theThis.typingOn();
         break;
       case 'typing off':
-        reply = theThis.typingOff();
+        replies = theThis.typingOff();
         break;
       case 'video':
-        reply = theThis.video();
+        replies = theThis.video();
         break;
       default:
         // handle JSON samples
-        if (reply.toLowerCase().startsWith('json:')) {
+        if (replies.toLowerCase().startsWith('json:')) {
           try {
             var
-              jsonString = reply.replace(/^json:/i, ''),
+              jsonString = replies.replace(/^json:/i, ''),
               json = JSON.parse(jsonString)
             ;
-            reply = json;
+            replies = json;
           }
           catch(ex) {
             // payload is not JSON, so leave as string
           }
         }
     }
-    bot.reply(message, reply, cb);
+    // check if json is one message or an array
+    if (!Array.isArray(replies)) {
+      replies = [].concat(replies);
+    }
+    // send reply; only include cb is last message
+    replies.forEach(function(reply, idx) {
+      bot.reply(message, reply, idx !== replies.length - 1 ? null : cb);
+    });
   });
 };
 
