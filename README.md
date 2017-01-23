@@ -57,3 +57,66 @@ controller.setupWebserver(process.env.port,function(err, webserver) {
 | `sample:typing off`                                             | the `typing_off` [Sender Action](https://developers.facebook.com/docs/messenger-platform/send-api-reference/sender-actions#sender_action)                                             |
 | `sample:video`                                                  | a [Video Attachment](https://developers.facebook.com/docs/messenger-platform/send-api-reference/video-attachment) embedded in a player                                                |
 | <pre>`sample:json:{`<br>`  "text": "Lorem Ipsum!"`<br>`}`</pre> | any message type; after the `sample:json:` add any valid message, see [Send API Reference](https://developers.facebook.com/docs/messenger-platform/send-api-reference)                |
+
+### JSON Examples
+
+Simple text
+
+```
+sample:json:{
+  "text": "hello world"
+}
+```
+
+Muliple messages
+
+```
+sample:json:[{
+  "text": "hello world"
+},{
+  "attachment": {
+    "type": "template",
+    "payload": {
+      "template_type": "generic",
+      "elements": [
+        {
+          "title": "rift",
+          "subtitle": "Next-generation virtual reality",
+          "item_url": "https://www.oculus.com/en-us/rift/",
+          "image_url": "http://assets.smalltalk.ai/sample-message/rift.png",
+          "buttons": [
+            {
+              "type": "web_url",
+              "url": "https://www.oculus.com/en-us/rift/",
+              "title": "Open Web URL"
+            },
+            {
+              "type": "postback",
+              "title": "Call Postback",
+              "payload": "Payload for first bubble"
+            }
+          ]
+        },
+        {
+          "title": "touch",
+          "subtitle": "Your Hands, Now in VR",
+          "item_url": "https://www.oculus.com/en-us/touch/",
+          "image_url": "http://assets.smalltalk.ai/sample-message/touch.png",
+          "buttons": [
+            {
+              "type": "web_url",
+              "url": "https://www.oculus.com/en-us/touch/",
+              "title": "Open Web URL"
+            },
+            {
+              "type": "postback",
+              "title": "Call Postback",
+              "payload": "Payload for second bubble"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}]
+```
