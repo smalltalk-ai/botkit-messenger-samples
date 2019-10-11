@@ -1,10 +1,11 @@
 {
   "name": "botkit-messenger-samples",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Module to receive sample messages of all types from a Facebook Messenger chatbot",
-  "main": "botkit-messenger-samples.js",
+  "main": "src/botkit-messenger-samples.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint",
+    "lint": "eslint src/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -18,13 +19,17 @@
     "examples",
     "chatbot"
   ],
-  "author": "Joshua Salwen <contact@smalltalk.ai> (https://www.smalltalk.ai)",
+  "author": "Joshua Salwen <contact@smalltalk.agency> (https://www.smalltalk.agency)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/smalltalk-ai/botkit-messenger-samples/issues"
   },
   "homepage": "https://github.com/smalltalk-ai/botkit-messenger-samples#readme",
   "dependencies": {
+    "p-iteration": "^1.1.8",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "eslint": "^6.5.1"
   }
 }
